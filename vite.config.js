@@ -4,6 +4,10 @@ import { Readable } from 'node:stream'
 
 const HLS_PROXY_PREFIX = '/__hls_proxy__'
 const ALLOWED_HOSTS = ['youplay.estantedigital.sbs']
+const NO_CACHE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate',
+  Expires: '0',
+}
 const HLS_ORIGINS = {
   stream: 'https://stream.youplay.com.br',
   media: 'https://media.youplay.com.br',
@@ -76,8 +80,10 @@ export default defineConfig({
   plugins: [react(), hlsDevelopmentProxy()],
   server: {
     allowedHosts: ALLOWED_HOSTS,
+    headers: NO_CACHE_HEADERS,
   },
   preview: {
     allowedHosts: ALLOWED_HOSTS,
+    headers: NO_CACHE_HEADERS,
   },
 })
