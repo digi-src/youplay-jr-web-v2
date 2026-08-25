@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { Readable } from 'node:stream'
 
 const HLS_PROXY_PREFIX = '/__hls_proxy__'
+const ALLOWED_HOSTS = ['youplay.estantedigital.sbs']
 const HLS_ORIGINS = {
   stream: 'https://stream.youplay.com.br',
   media: 'https://media.youplay.com.br',
@@ -73,4 +74,10 @@ function hlsDevelopmentProxy() {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), hlsDevelopmentProxy()],
+  server: {
+    allowedHosts: ALLOWED_HOSTS,
+  },
+  preview: {
+    allowedHosts: ALLOWED_HOSTS,
+  },
 })
