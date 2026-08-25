@@ -1,0 +1,556 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--color-bg);
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.navLink,
+.navLinkActive {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  padding-bottom: 4px;
+}
+
+.navLinkActive {
+  color: var(--color-ink);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.navLink:hover {
+  color: var(--color-ink);
+}
+
+.searchBox {
+  flex: 1;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 10px 18px;
+}
+
+.searchIcon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 14px;
+  color: var(--color-ink);
+  width: 100%;
+}
+
+.ageFilters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.agePill {
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.agePillActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.content {
+  padding: 24px 40px 56px;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 410px;
+  background:
+    radial-gradient(circle at 76% 44%, rgba(132, 73, 219, 0.82) 0, rgba(87, 31, 164, 0.35) 25%, transparent 48%),
+    linear-gradient(112deg, #30106f 0%, #4d17a2 52%, #2b0868 100%);
+  border-radius: 28px;
+  padding: 44px 52px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: inset 0 0 80px rgba(30, 3, 80, 0.2);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(27, 5, 74, 0.16), transparent 55%);
+  pointer-events: none;
+}
+
+.heroText {
+  position: relative;
+  z-index: 3;
+  flex: 0 1 560px;
+  min-width: 0;
+  max-width: 560px;
+}
+
+.heroTag {
+  display: inline-block;
+  background: linear-gradient(135deg, #daf377, var(--color-accent));
+  color: #27105b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 18px rgba(200, 226, 92, 0.18);
+}
+
+.heroTitle {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(40px, 3.2vw, 55px);
+  line-height: 1.06;
+  letter-spacing: -1.3px;
+  color: #fff;
+  margin: 0 0 18px;
+}
+
+.heroTitle span {
+  display: block;
+  color: #d9f16d;
+}
+
+.heroDescription {
+  max-width: 545px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 26px;
+}
+
+.heroActions {
+  display: flex;
+  gap: 14px;
+}
+
+.watchButton,
+.listButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 50px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 25px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.watchButton {
+  border: none;
+  background: linear-gradient(135deg, #ddf77c, var(--color-accent));
+  color: #27105b;
+  box-shadow: 0 8px 24px rgba(200, 226, 92, 0.2);
+}
+
+.listButton {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.watchButton:hover,
+.listButton:hover {
+  transform: translateY(-2px);
+}
+
+.watchButton:hover {
+  box-shadow: 0 10px 28px rgba(200, 226, 92, 0.3);
+}
+
+.listButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.heroArt {
+  position: absolute;
+  z-index: 2;
+  inset: 0 5% 0 auto;
+  width: 47%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.heroMascot {
+  height: 116%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  transform: translateY(5%);
+  filter: drop-shadow(0 16px 22px rgba(21, 2, 57, 0.28));
+}
+
+.heroDecoration {
+  position: absolute;
+  z-index: 1;
+  color: #d9f16d;
+  line-height: 1;
+  filter: drop-shadow(0 5px 7px rgba(20, 1, 53, 0.28));
+  pointer-events: none;
+}
+
+.heroHeart {
+  top: 22%;
+  left: 39%;
+  font-size: 48px;
+  transform: rotate(-8deg);
+}
+
+.heroStar {
+  top: 45%;
+  right: 5.8%;
+  font-size: 48px;
+  transform: rotate(10deg);
+}
+
+.heroMusic {
+  top: 5%;
+  right: 8%;
+  color: rgba(157, 92, 232, 0.8);
+  font-size: 54px;
+  transform: rotate(5deg);
+}
+
+.heroSpark {
+  position: absolute;
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
+
+.heroSparkOne {
+  top: 13%;
+  left: 44%;
+}
+
+.heroSparkTwo {
+  top: 50%;
+  left: 45%;
+}
+
+.heroSparkThree {
+  top: 61%;
+  right: 7%;
+}
+
+.heroBook {
+  position: absolute;
+  z-index: 1;
+  left: 39%;
+  bottom: 12%;
+  width: 64px;
+  height: 45px;
+  border-radius: 7px 7px 12px 12px;
+  background: linear-gradient(145deg, #8461dc, #482394);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 9px 14px rgba(25, 2, 63, 0.32);
+  transform: rotate(-13deg);
+  pointer-events: none;
+}
+
+.heroBook::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  bottom: 2px;
+  left: 50%;
+  width: 2px;
+  background: rgba(36, 11, 90, 0.55);
+}
+
+.heroBook span {
+  position: absolute;
+  inset: 6px 7px;
+  border-radius: 4px;
+  border-top: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.row {
+  margin-bottom: 40px;
+}
+
+.rowHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.rowTitle {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--color-ink);
+  margin: 0 0 4px;
+}
+
+.rowSubtitle {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.rowLink {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rowLink:hover {
+  text-decoration: underline;
+}
+
+.rowActions,
+.rowNavigation {
+  display: flex;
+  align-items: center;
+}
+
+.rowActions {
+  gap: 16px;
+}
+
+.rowNavigation {
+  gap: 7px;
+}
+
+.rowNavigation button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(84, 58, 188, 0.08);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.rowNavigation button:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.rowNavigation button:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: none;
+}
+
+.rowScroller {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  padding: 4px 2px 10px;
+}
+
+.rowScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.stateText {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.screenTimeCard {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 24px 32px;
+}
+
+.screenTimeMascot {
+  width: 90px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.screenTimeText {
+  flex: 1;
+  min-width: 0;
+}
+
+.screenTimeTitle {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-ink);
+  margin: 0 0 6px;
+}
+
+.screenTimeDescription {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.screenTimeButton {
+  flex-shrink: 0;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    gap: 12px;
+  }
+
+  .searchBox {
+    order: 3;
+    max-width: none;
+    flex-basis: 100%;
+  }
+
+  .content {
+    padding: 20px 20px 40px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    min-height: 650px;
+    padding: 36px 24px 0;
+  }
+
+  .heroText {
+    max-width: none;
+    flex: none;
+  }
+
+  .heroActions {
+    justify-content: center;
+  }
+
+  .heroArt {
+    position: absolute;
+    inset: auto 0 -12px;
+    width: 100%;
+    height: 310px;
+  }
+
+  .heroMascot {
+    height: 122%;
+    transform: translateY(4%);
+  }
+
+  .heroHeart {
+    top: auto;
+    bottom: 31%;
+    left: 12%;
+  }
+
+  .heroBook {
+    left: 14%;
+    bottom: 8%;
+  }
+
+  .heroStar {
+    top: auto;
+    right: 10%;
+    bottom: 19%;
+  }
+
+  .heroMusic {
+    top: auto;
+    right: 8%;
+    bottom: 40%;
+  }
+
+  .heroSparkOne {
+    top: auto;
+    left: 8%;
+    bottom: 43%;
+  }
+
+  .heroSparkTwo {
+    top: auto;
+    left: 21%;
+    bottom: 18%;
+  }
+
+  .heroSparkThree {
+    top: auto;
+    right: 8%;
+    bottom: 35%;
+  }
+
+  .screenTimeCard {
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,35 @@
+.otpInput {
+  display: flex;
+  gap: 10px;
+}
+
+.digit {
+  width: 48px;
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-ink);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.digit:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-bg);
+}
+
+.digit:disabled {
+  opacity: 0.6;
+}
+
+@media (max-width: 420px) {
+  .digit {
+    width: 42px;
+    height: 50px;
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,33 @@
+:root {
+  /* Fonts */
+  --font-primary: 'Codec Pro', 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-secondary: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+
+  /* Raw palette */
+  --color-purple-500: #543abc;
+  --color-purple-400: #7661c9;
+  --color-purple-300: #9889d7;
+  --color-purple-200: #bbb0e4;
+  --color-purple-100: #ddd8f2;
+
+  --color-green-500: #c8e25c;
+  --color-green-400: #d3e87d;
+  --color-green-300: #deee9d;
+  --color-green-200: #e9f3be;
+  --color-green-100: #f4f9de;
+
+  --color-cream: #fffaf3;
+
+  /* Semantic tokens */
+  --color-bg: var(--color-cream);
+  --color-ink: var(--color-purple-500);
+  --color-text-muted: var(--color-purple-400);
+  --color-border: var(--color-purple-100);
+
+  --color-primary: var(--color-purple-500);
+  --color-primary-bg: rgba(84, 58, 188, 0.12);
+  --color-panel: var(--color-purple-500);
+
+  --color-accent: var(--color-green-500);
+  --color-error: #d9375b;
+}

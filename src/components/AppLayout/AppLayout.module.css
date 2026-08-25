@@ -1,0 +1,19 @@
+.shell {
+  min-height: 100svh;
+}
+
+.main {
+  margin-left: 240px;
+  min-height: 100svh;
+  transition: margin-left 0.2s ease;
+}
+
+.mainCollapsed {
+  margin-left: 84px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 84px;
+  }
+}

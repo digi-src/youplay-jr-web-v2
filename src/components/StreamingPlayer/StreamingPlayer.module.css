@@ -1,0 +1,562 @@
+.player {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  background: #05030a;
+  color: #fff;
+  user-select: none;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #05030a;
+  cursor: pointer;
+}
+
+.videoShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5, 2, 14, 0.18), transparent 22%, transparent 78%, rgba(5, 2, 14, 0.12));
+  pointer-events: none;
+}
+
+.loading,
+.errorOverlay,
+.centerPlay,
+.nextOverlay {
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  display: flex;
+  color: var(--color-accent);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.loading svg {
+  animation: spin 0.8s linear infinite;
+}
+
+.centerPlay {
+  width: 86px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  border-radius: 50%;
+  background: rgba(40, 17, 102, 0.78);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(12px);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.centerPlay svg {
+  margin-left: 5px;
+}
+
+.centerPlay:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: rgba(84, 58, 188, 0.92);
+}
+
+.errorOverlay {
+  width: min(440px, calc(100% - 40px));
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: rgba(14, 7, 30, 0.9);
+  text-align: center;
+  backdrop-filter: blur(18px);
+}
+
+.errorOverlay h2,
+.errorOverlay p {
+  margin: 0;
+}
+
+.errorOverlay p {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.errorOverlay button {
+  margin-top: 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #27105b;
+  padding: 12px 22px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.playerChrome {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.playerChromeVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.topBar,
+.bottomBar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.topBar {
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 104px;
+  padding: 22px 34px 38px;
+  background: linear-gradient(180deg, rgba(5, 2, 13, 0.9), rgba(5, 2, 13, 0));
+}
+
+.titleBlock {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.titleBlock span {
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.45px;
+  text-transform: uppercase;
+}
+
+.titleBlock strong {
+  max-width: min(620px, 65vw);
+  overflow: hidden;
+  color: #fff;
+  font-family: var(--font-primary);
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottomBar {
+  bottom: 0;
+  padding: 70px 34px 24px;
+  background: linear-gradient(0deg, rgba(5, 2, 13, 0.94), rgba(5, 2, 13, 0));
+}
+
+.progressRange,
+.volumeRange {
+  --range-progress: 0%;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-accent) var(--range-progress), rgba(255, 255, 255, 0.32) var(--range-progress));
+  cursor: pointer;
+}
+
+.progressRange {
+  width: 100%;
+  height: 5px;
+  display: block;
+  margin: 0 0 15px;
+}
+
+.progressRange::-webkit-slider-thumb,
+.volumeRange::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.progressRange::-moz-range-thumb,
+.volumeRange::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.controlsRow,
+.controlsGroup,
+.volumeControl {
+  display: flex;
+  align-items: center;
+}
+
+.controlsRow {
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.controlsGroup {
+  gap: 8px;
+}
+
+.iconButton {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.iconButton:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: scale(1.06);
+}
+
+.skipLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.volumeControl {
+  gap: 2px;
+}
+
+.volumeRange {
+  width: 88px;
+  height: 4px;
+}
+
+.timeLabel {
+  min-width: 100px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.episodesButton {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  background: rgba(14, 7, 30, 0.46);
+  color: #fff;
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.episodesButton:hover,
+.episodesButtonActive {
+  border-color: var(--color-accent);
+  background: rgba(84, 58, 188, 0.78);
+}
+
+.episodePanel {
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  right: 0;
+  width: min(410px, 92vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 6, 27, 0.96);
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(22px);
+  transform: translateX(105%);
+  transition: transform 0.28s ease;
+}
+
+.episodePanelOpen {
+  transform: translateX(0);
+}
+
+.panelHeader {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 26px 22px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panelHeader span {
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.panelHeader h2 {
+  margin: 4px 0 0;
+  color: #fff;
+  font-size: 21px;
+}
+
+.episodePanelList {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.panelEpisode {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: center;
+  gap: 13px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
+  color: #fff;
+  padding: 8px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.panelEpisode:hover:not(:disabled) {
+  border-color: rgba(200, 226, 92, 0.45);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.panelEpisodeCurrent {
+  border-color: var(--color-accent);
+  background: rgba(84, 58, 188, 0.36);
+  cursor: default;
+}
+
+.panelThumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-primary), #2d126e);
+  color: #fff;
+  font-weight: 700;
+}
+
+.panelThumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.panelThumb svg {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.panelEpisodeInfo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.panelEpisodeInfo span {
+  color: var(--color-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+}
+
+.panelEpisodeInfo strong {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panelEpisodeInfo small {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+}
+
+.nextOverlay {
+  width: min(420px, calc(100% - 40px));
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background: rgba(15, 7, 34, 0.92);
+  text-align: center;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(18px);
+}
+
+.nextOverlay > span {
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.nextOverlay h2 {
+  margin: 7px 0 8px;
+  font-size: 23px;
+}
+
+.nextOverlay p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+}
+
+.nextActions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.nextPrimary,
+.nextSecondary {
+  border-radius: 999px;
+  padding: 11px 18px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nextPrimary {
+  border: none;
+  background: var(--color-accent);
+  color: #27105b;
+}
+
+.nextSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #fff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .topBar {
+    min-height: 88px;
+    padding: 14px 16px 30px;
+  }
+
+  .titleBlock strong {
+    max-width: calc(100vw - 95px);
+    font-size: 15px;
+  }
+
+  .bottomBar {
+    padding: 55px 16px 14px;
+  }
+
+  .controlsRow {
+    gap: 8px;
+  }
+
+  .controlsGroup {
+    gap: 2px;
+  }
+
+  .volumeRange,
+  .timeLabel,
+  .episodesButton span {
+    display: none;
+  }
+
+  .episodesButton {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+  }
+
+  .centerPlay {
+    width: 72px;
+    height: 72px;
+  }
+
+  .episodePanel {
+    width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .controlsGroup:first-child .iconButton:nth-of-type(2),
+  .controlsGroup:first-child .iconButton:nth-of-type(3) {
+    display: none;
+  }
+
+  .panelEpisode {
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .playerChrome,
+  .episodePanel,
+  .centerPlay,
+  .iconButton,
+  .panelEpisode {
+    transition: none;
+  }
+}

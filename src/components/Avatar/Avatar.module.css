@@ -1,0 +1,30 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  color: #fff;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sm {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.md {
+  width: 56px;
+  height: 56px;
+  font-size: 22px;
+}
+
+.lg {
+  width: 88px;
+  height: 88px;
+  font-size: 36px;
+  border-radius: 22px;
+}
